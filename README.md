@@ -43,9 +43,9 @@ Das vollständige Konzept liegt unter [`docs/konzept/`](docs/konzept/). Der Hub 
 
 ## Projektfamilie
 
-- [`opengewerk`](https://github.com/opengewerk/opengewerk) – die Handwerkersoftware beim Mandanten, erste und bisher einzige Quelle für den Hub.
-- [`opengewerk-kanzlei`](https://github.com/opengewerk/opengewerk-kanzlei) – dieser Hub, mit dem eine Kanzlei alle Mandanten aus einer Anwendung heraus bearbeitet.
-- [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec) – der gemeinsame API-Vertrag, den Hub und Handwerkersoftware beide implementieren und dessen unterstützte Version beide Seiten deklarieren.
+- [`opengewerk`](https://github.com/opengewerk/opengewerk): die Handwerkersoftware beim Mandanten, erste und bisher einzige Quelle für den Hub.
+- [`opengewerk-kanzlei`](https://github.com/opengewerk/opengewerk-kanzlei): dieser Hub, mit dem eine Kanzlei alle Mandanten aus einer Anwendung heraus bearbeitet.
+- [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec): der gemeinsame API-Vertrag, den Hub und Handwerkersoftware beide implementieren und dessen unterstützte Version beide Seiten deklarieren.
 
 ## Mitmachen
 
