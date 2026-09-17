@@ -1,4 +1,4 @@
-# OpenGewerk Kanzlei – Planungskonzept (Kanzlei-Hub für Steuerberater) · v1.1
+# OpenGewerk Kanzlei: Planungskonzept (Kanzlei-Hub für Steuerberater) · v1.1
 
 2026-09-17 · Eigenständiges Projekt, Repository `opengewerk-kanzlei` in der GitHub-Organisation `opengewerk` · v1.1 trägt den Projektnamen ein
 
@@ -13,7 +13,7 @@ Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Ma
 
 ## 0. Leitentscheidungen
 
-1. **Föderation statt Zentralisierung.** Der Hub speichert keine Buchhaltung. Er greift per API live auf die Mandanten-Instanzen zu und hält nur einen Cache für Übersichten. Datenhoheit bleibt beim Mandanten – das ist das Verkaufsargument gegenüber DATEV Unternehmen online.
+1. **Föderation statt Zentralisierung.** Der Hub speichert keine Buchhaltung. Er greift per API live auf die Mandanten-Instanzen zu und hält nur einen Cache für Übersichten. Datenhoheit bleibt beim Mandanten, das ist das Verkaufsargument gegenüber DATEV Unternehmen online.
 2. **Read-only als Default.** Schreibende Rechte (Buchungsvorschläge, Kontenzuordnungen, Rückfragen) werden vom Mandanten explizit pro Scope freigegeben und sind jederzeit widerrufbar.
 3. **Der Mandant lädt ein, nicht die Kanzlei.** Verbindungsaufbau immer vom Mandantensystem aus (Einladungscode), damit kein Mandant ohne sein Wissen angebunden werden kann.
 4. **Eigenes Repository (`opengewerk-kanzlei`), eigene Releases**, aber ein gemeinsam versioniertes API-Vertrags-Paket (`opengewerk-api-spec`), damit Hub und Handwerkersoftware kompatibel bleiben.
@@ -34,7 +34,7 @@ Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Ma
 1. Montagmorgen: Welche der 40 Mandanten haben unverbuchte Belege, offene Rückfragen, fehlende Bankumsätze, anstehende USt-VA?
 2. Monatsabschluss eines Mandanten: Belege prüfen, Kontierung korrigieren, Rückfragen stellen, USt-VA-Werte abnehmen, Export erzeugen.
 3. Jahresabschluss: Anlagenverzeichnis prüfen, Abgrenzungen buchen (Vorschlag), Checkliste abarbeiten, Bilanzwerte übernehmen.
-4. Betriebsprüfung: Z1–Z3-Export eines Mandanten aus dem Hub anstoßen, Prüferzugang zeitlich befristet einrichten.
+4. Betriebsprüfung: Z1-Z3-Export eines Mandanten aus dem Hub anstoßen, Prüferzugang zeitlich befristet einrichten.
 5. Onboarding: Neuer Mandant schickt Einladungscode; Kanzlei richtet Kontenrahmen-Profil und Fristen ein.
 
 ---
@@ -45,15 +45,15 @@ Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Ma
 
 ```
 ┌────────────────────────────┐        ┌────────────────────────────┐
-│ Kanzlei-Hub (self-hosted)  │        │ Mandant A – Handwerkersoftw.│
+│ Kanzlei-Hub (self-hosted)  │        │ Mandant A: Handwerkersoftw.│
 │  · Web-App (Kanzlei-UI)    │◄──────►│  · Kanzlei-Connector-API    │
 │  · Föderations-Gateway     │ HTTPS  │  · Scoped Token, Webhooks   │
 │  · Adapter (HWS, sevdesk…) │        └────────────────────────────┘
 │  · Cache / Index (Postgres)│        ┌────────────────────────────┐
-│  · Fristen-Engine (Kanzlei)│◄──────►│ Mandant B – Handwerkersoftw.│
+│  · Fristen-Engine (Kanzlei)│◄──────►│ Mandant B: Handwerkersoftw.│
 │  · Aufgaben/Rückfragen     │        └────────────────────────────┘
 │  · Audit-Log               │        ┌────────────────────────────┐
-│  · Export-Service (DATEV…) │◄──────►│ Mandant C – andere Quelle ⏳│
+│  · Export-Service (DATEV…) │◄──────►│ Mandant C: andere Quelle ⏳│
 └────────────────────────────┘        └────────────────────────────┘
 ```
 
@@ -68,7 +68,7 @@ Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Ma
 ### 2.3 Cache-Regeln
 
 - Gecacht werden nur Aggregate und Indexdaten (Anzahl offener Belege, Salden, Fristen, Belegköpfe)
-- **Belegbilder und Buchungsdetails werden nie persistent im Hub gespeichert** – nur im Speicher/temporär zur Anzeige (Datenhoheit + Verschwiegenheit)
+- **Belegbilder und Buchungsdetails werden nie persistent im Hub gespeichert**: nur im Speicher/temporär zur Anzeige (Datenhoheit + Verschwiegenheit)
 - Cache je Mandant löschbar; wird bei Verbindungstrennung automatisch geleert
 
 ### 2.4 Verbindungsaufbau (Handshake)
@@ -76,7 +76,7 @@ Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Ma
 1. Mandant erzeugt in seiner Handwerkersoftware unter *Einstellungen → Steuerberater* einen Einladungscode (einmalig, 24 h gültig) und wählt die freizugebenden Scopes
 2. Kanzlei gibt Code + Mandanten-URL im Hub ein
 3. Hub tauscht Code gegen langlebigen, rotierbaren Token (OAuth 2.0 Device-/Authorization-Code-ähnlich); Token ist an Hub-Instanz gebunden (mTLS-Zertifikat oder DPoP) ⚖
-4. Mandant sieht in seiner Instanz: verbundene Kanzlei, Scopes, letzte Zugriffe – und kann jederzeit trennen
+4. Mandant sieht in seiner Instanz: verbundene Kanzlei, Scopes, letzte Zugriffe; er kann die Verbindung jederzeit trennen
 
 ### 2.5 Scopes (vom Mandanten vergeben)
 
@@ -90,7 +90,7 @@ Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Ma
 | `write:proposals` | Buchungs-/Kontierungsvorschläge (Mandant bestätigt) | optional |
 | `write:coa` | Kontenrahmen-Profil, Automatikkonten pushen | optional |
 | `write:closing` | Abschlussbuchungen direkt buchen | optional, nur Berufsträger |
-| `export:audit` | Z1–Z3/GDPdU-Export auslösen | optional |
+| `export:audit` | Z1-Z3/GDPdU-Export auslösen | optional |
 
 ---
 
@@ -99,19 +99,19 @@ Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Ma
 ### 3.1 Mandantenübersicht (Kanzlei-Dashboard)
 
 - Liste aller Mandanten mit Status-Ampel: Verbindung, unverbuchte Belege, offene Rückfragen, unabgeglichene Bankumsätze, nächste Frist, letzte Festschreibung
-- **Buchhaltungs-Gesundheitsindex je Mandant ★**: gewichtete Kennzahl aus Belegrückstand, offenen Rückfragen, fehlenden Belegen (Bankumsatz ohne Beleg), überfälligen Fristen – sortierbar, damit die Kanzlei die richtigen Mandanten zuerst bearbeitet
+- **Buchhaltungs-Gesundheitsindex je Mandant ★**: gewichtete Kennzahl aus Belegrückstand, offenen Rückfragen, fehlenden Belegen (Bankumsatz ohne Beleg), überfälligen Fristen, sortierbar, damit die Kanzlei die richtigen Mandanten zuerst bearbeitet
 - Filter: Sachbearbeiter, Mandantengruppe, Rechtsform, Fristtyp
 - Zuständigkeiten: Sachbearbeiter je Mandant (Vertretungsregel)
 - Mandantengruppen (z. B. "Handwerk Rhein-Neckar", "Bilanzierer", "EÜR")
 
 ### 3.2 Mandanten-Arbeitsplatz
 
-- Wechsel in einen Mandanten ohne neuen Login; Mandantenkontext immer sichtbar (Farbcode, Name) ⚖ – verhindert Verwechslungen
+- Wechsel in einen Mandanten ohne neuen Login; Mandantenkontext immer sichtbar (Farbcode, Name) ⚖; das verhindert Verwechslungen
 - Belegprüfung: Belegbild + Buchungsvorschlag nebeneinander, Kontierung korrigieren, Steuer-Schlüssel prüfen, Freigabe
-- Journal, Kontenblätter, Saldenlisten, OP-Listen, BWA, USt-VA-Vorschau – live aus dem Mandantensystem
+- Journal, Kontenblätter, Saldenlisten, OP-Listen, BWA, USt-VA-Vorschau, live aus dem Mandantensystem
 - Rückfragen an den Mandanten direkt am Beleg ("Was war das für ein Kauf?") mit Fälligkeit; Mandant antwortet in seiner Instanz oder App
 - Fehlende-Belege-Liste: Bankumsätze ohne Beleg werden automatisch als Rückfrage vorgeschlagen ★
-- Buchungsvorschläge (Scope `write:proposals`): Kanzlei schlägt vor, Mandant bestätigt mit einem Klick – oder Kanzlei bucht direkt (Scope `write:closing`)
+- Buchungsvorschläge (Scope `write:proposals`): Kanzlei schlägt vor, Mandant bestätigt mit einem Klick, oder die Kanzlei bucht direkt (Scope `write:closing`)
 - Periodenfestschreibung anstoßen/anfordern
 
 ### 3.3 Fristen-Engine (Kanzleiebene)
@@ -121,7 +121,7 @@ Eigene Fristen-Engine im Hub (gleiche Grundidee wie in der Handwerkersoftware), 
 - USt-VA (monatlich/vierteljährlich, Dauerfristverlängerung), Zusammenfassende Meldung, Jahressteuererklärungen, Jahresabschluss-/Offenlegungsfristen, Lohnsteuer-Anmeldung
 - Mandantenspezifische Fristen aus der Handwerkersoftware (z. B. Sicherheitseinbehalt-Auszahlung, Freistellungsbescheinigung §48 EStG läuft ab)
 - Kanzlei-Fristenkalender über alle Mandanten, Ampel, Zuweisung an Sachbearbeiter, Erinnerung
-- ELSTER-Abgabe erfolgt weiterhin aus der Kanzleisoftware/ELSTER – der Hub liefert die Werte und dokumentiert "abgegeben am" ⏳ (Direktübermittlung wie in der HWS bewusst ausgeklammert)
+- ELSTER-Abgabe erfolgt weiterhin aus der Kanzleisoftware/ELSTER, der Hub liefert die Werte und dokumentiert "abgegeben am" ⏳ (Direktübermittlung wie in der HWS bewusst ausgeklammert)
 
 ### 3.4 Aufgaben & Kommunikation
 
@@ -141,7 +141,7 @@ Eigene Fristen-Engine im Hub (gleiche Grundidee wie in der Handwerkersoftware), 
 
 - DATEV-Buchungsstapel und Belegbilder je Mandant oder gesammelt für einen Zeitraum
 - Sammelexport für mehrere Mandanten in einem Lauf ★
-- Betriebsprüfung: Z1–Z3/GDPdU-Export auslösen; Prüferzugang (read-only, befristet, protokolliert) ⚖
+- Betriebsprüfung: Z1-Z3/GDPdU-Export auslösen; Prüferzugang (read-only, befristet, protokolliert) ⚖
 - Export zu Kanzleisoftware (DATEV Kanzlei-Rechnungswesen, Agenda, Addison) über deren Importformate ⏳
 - Offene REST-API des Hubs (z. B. für Kanzlei-eigene Auswertungen)
 
@@ -154,7 +154,7 @@ Eigene Fristen-Engine im Hub (gleiche Grundidee wie in der Handwerkersoftware), 
 ### 3.8 Hilfe & Dokumentation
 
 - Kontextsensitive Hilfe, Kanzlei-Wissensdatenbank (wie in der Handwerkersoftware)
-- Onboarding-Anleitung für Mandanten ("So verbinden Sie Ihre Kanzlei") – öffentlich, aus Mandantensicht
+- Onboarding-Anleitung für Mandanten ("So verbinden Sie Ihre Kanzlei"), öffentlich, aus Mandantensicht
 - Administratorhandbuch (Installation, Backup, Token-Rotation)
 
 ---
@@ -223,12 +223,12 @@ Damit der Hub funktioniert, braucht die Handwerkersoftware (Hauptplan v2) folgen
 
 | Phase | Inhalt | Ergebnis |
 | --- | --- | --- |
-| 0 – Vertrag | `opengewerk-api-spec` v1, Connector-Modul in der HWS, Handshake, Scopes, Audit-Log beidseitig | Verbindung steht, read-only |
-| 1 – Übersicht | Mandantenliste, Status-Ampel, Gesundheitsindex, Cache/Sync, Webhooks | Kanzlei sieht alle Mandanten auf einen Blick |
-| 2 – Arbeitsplatz | Belegprüfung, Journal/Konten/OP live, Rückfragen, Fehlende-Belege-Liste | Monatsarbeit aus dem Hub |
-| 3 – Fristen & Aufgaben | Kanzlei-Fristen-Engine, Aufgaben, Checklisten, Sachbearbeiter-Zuweisung | Kanzleisteuerung |
-| 4 – Schreiben & Export | Buchungsvorschläge, Kontenrahmen-Profile, DATEV-Sammelexport, Prüfer-Zugang, Z1–Z3 | Vollständiger Buchhaltungsprozess |
-| 5 – Abschluss & Erweiterung | Jahresabschluss-Checkliste, USt-Verprobung, Abschlussbuchungen, weitere Adapter (sevdesk/Lexware/CSV), Benchmark | Vollausbau |
+| 0: Vertrag | `opengewerk-api-spec` v1, Connector-Modul in der HWS, Handshake, Scopes, Audit-Log beidseitig | Verbindung steht, read-only |
+| 1: Übersicht | Mandantenliste, Status-Ampel, Gesundheitsindex, Cache/Sync, Webhooks | Kanzlei sieht alle Mandanten auf einen Blick |
+| 2: Arbeitsplatz | Belegprüfung, Journal/Konten/OP live, Rückfragen, Fehlende-Belege-Liste | Monatsarbeit aus dem Hub |
+| 3: Fristen & Aufgaben | Kanzlei-Fristen-Engine, Aufgaben, Checklisten, Sachbearbeiter-Zuweisung | Kanzleisteuerung |
+| 4: Schreiben & Export | Buchungsvorschläge, Kontenrahmen-Profile, DATEV-Sammelexport, Prüfer-Zugang, Z1-Z3 | Vollständiger Buchhaltungsprozess |
+| 5: Abschluss & Erweiterung | Jahresabschluss-Checkliste, USt-Verprobung, Abschlussbuchungen, weitere Adapter (sevdesk/Lexware/CSV), Benchmark | Vollausbau |
 
 ---
 
@@ -248,9 +248,9 @@ Damit der Hub funktioniert, braucht die Handwerkersoftware (Hauptplan v2) folgen
 - ELSTER-Direktübermittlung aus dem Hub (Werteübergabe an die Kanzleisoftware reicht) ⏳
 - Lohnbuchhaltung (bleibt in der Kanzleisoftware; Hub zeigt nur Lohnexport-Status) ⏳
 - Mehrkanzlei-Instanzen / Kanzleiverbünde ⏳
-- Adapter für Fremdsysteme (sevdesk, Lexware Office, CSV) ⏳ – nach stabiler `opengewerk-api-spec` v1
-- Mandanten-Benchmark ⏳ – nur mit Einwilligung und ausreichender Mandantenzahl
-- Native Apps – Kanzleiarbeit ist Desktop; Mandanten antworten über die Handwerkersoftware-App
+- Adapter für Fremdsysteme (sevdesk, Lexware Office, CSV) ⏳, erst nach stabiler `opengewerk-api-spec` v1
+- Mandanten-Benchmark ⏳, nur mit Einwilligung und ausreichender Mandantenzahl
+- Native Apps: Kanzleiarbeit ist Desktop; Mandanten antworten über die Handwerkersoftware-App
 
 ---
 
@@ -263,4 +263,4 @@ Damit der Hub funktioniert, braucht die Handwerkersoftware (Hauptplan v2) folgen
 - Tech-Stack: gleicher Stack wie die Handwerkersoftware (gemeinsame UI-Komponenten, gleiche Betriebsmuster) oder bewusst getrennt?
 - Lizenz: gleiche Open-Source-Lizenz wie die Handwerkersoftware; Klärung, ob Kanzleien ein kommerzielles Support-Modell brauchen
 - Hosting-Empfehlung für Kanzleien ohne eigene IT (Referenz-Hoster mit AV-Vertrag vs. reine Anleitung)
-- Ob der Hub auch für **Bürogemeinschaften/Buchhaltungsbüros** (nicht Steuerberater) freigegeben wird – berufsrechtliche Grenzen (§6 StBerG) beachten
+- Ob der Hub auch für **Bürogemeinschaften/Buchhaltungsbüros** (nicht Steuerberater) freigegeben wird, berufsrechtliche Grenzen (§6 StBerG) beachten

@@ -34,12 +34,12 @@ Das vollständige Konzept liegt unter [`docs/konzept/`](docs/konzept/). Der Hub 
 
 | Phase | Inhalt | Ergebnis |
 | --- | --- | --- |
-| 0 – Vertrag | `opengewerk-api-spec` v1, Connector-Modul in der HWS, Handshake, Scopes, Audit-Log beidseitig | Verbindung steht, read-only |
-| 1 – Übersicht | Mandantenliste, Status-Ampel, Gesundheitsindex, Cache/Sync, Webhooks | Kanzlei sieht alle Mandanten auf einen Blick |
-| 2 – Arbeitsplatz | Belegprüfung, Journal/Konten/OP live, Rückfragen, Fehlende-Belege-Liste | Monatsarbeit aus dem Hub |
-| 3 – Fristen & Aufgaben | Kanzlei-Fristen-Engine, Aufgaben, Checklisten, Sachbearbeiter-Zuweisung | Kanzleisteuerung |
-| 4 – Schreiben & Export | Buchungsvorschläge, Kontenrahmen-Profile, DATEV-Sammelexport, Prüfer-Zugang, Z1–Z3 | Vollständiger Buchhaltungsprozess |
-| 5 – Abschluss & Erweiterung | Jahresabschluss-Checkliste, USt-Verprobung, Abschlussbuchungen, weitere Adapter (sevdesk/Lexware/CSV), Benchmark | Vollausbau |
+| 0: Vertrag | `opengewerk-api-spec` v1, Connector-Modul in der HWS, Handshake, Scopes, Audit-Log beidseitig | Verbindung steht, read-only |
+| 1: Übersicht | Mandantenliste, Status-Ampel, Gesundheitsindex, Cache/Sync, Webhooks | Kanzlei sieht alle Mandanten auf einen Blick |
+| 2: Arbeitsplatz | Belegprüfung, Journal/Konten/OP live, Rückfragen, Fehlende-Belege-Liste | Monatsarbeit aus dem Hub |
+| 3: Fristen & Aufgaben | Kanzlei-Fristen-Engine, Aufgaben, Checklisten, Sachbearbeiter-Zuweisung | Kanzleisteuerung |
+| 4: Schreiben & Export | Buchungsvorschläge, Kontenrahmen-Profile, DATEV-Sammelexport, Prüfer-Zugang, Z1-Z3 | Vollständiger Buchhaltungsprozess |
+| 5: Abschluss & Erweiterung | Jahresabschluss-Checkliste, USt-Verprobung, Abschlussbuchungen, weitere Adapter (sevdesk/Lexware/CSV), Benchmark | Vollausbau |
 
 ## Projektfamilie
 
