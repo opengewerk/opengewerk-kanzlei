@@ -1,6 +1,11 @@
-# OpenGewerk Kanzlei
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/opengewerk/.github/main/brand/opengewerk-logo-dark.svg">
+    <img alt="OpenGewerk" src="https://raw.githubusercontent.com/opengewerk/.github/main/brand/opengewerk-logo.svg" width="420">
+  </picture>
+</p>
 
-**Self-hosted Hub für Steuerberater**
+<p align="center"><strong>Self-hosted Hub für Steuerberater</strong></p>
 
 ## Was ist OpenGewerk Kanzlei?
 
