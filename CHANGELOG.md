@@ -11,3 +11,11 @@ die Versionsnummern folgen der [Semantischen Versionierung](https://semver.org/l
 
 - Initiales Repository-Gerüst
 - CI-Job "Schreibweise", der Gedankenstriche im gesamten Repository meldet
+
+### Geändert
+
+- Planungskonzept auf v1.2: Leitentscheidung 7 zum gemeinsamen Tech-Stack, neuer
+  Abschnitt 3.3a mit der Regel-Engine für steuerliche Parameter, Stand der
+  Spezifikation und Token-Eigenschaften nach ADR 0006 nachgezogen, Verzahnung mit
+  der neu geschnittenen Roadmap der Handwerkersoftware ausgeschrieben
+- Tech-Stack und Lizenz sind keine offenen Entscheidungen mehr

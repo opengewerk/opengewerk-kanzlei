@@ -1,6 +1,6 @@
-# OpenGewerk Kanzlei: Planungskonzept (Kanzlei-Hub für Steuerberater) · v1.1
+# OpenGewerk Kanzlei: Planungskonzept (Kanzlei-Hub für Steuerberater) · v1.2
 
-2026-09-17 · Eigenständiges Projekt, Repository `opengewerk-kanzlei` in der GitHub-Organisation `opengewerk` · v1.1 trägt den Projektnamen ein
+2026-09-17 · Eigenständiges Projekt, Repository `opengewerk-kanzlei` in der GitHub-Organisation `opengewerk` · v1.1 trägt den Projektnamen ein · v1.2 (18.09.2026) zieht den entschiedenen Tech-Stack, die Regel-Engine und den Stand der Spezifikation nach
 
 Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Mandanten-Instanzen der Handwerkersoftware anbindet. Die Kanzlei arbeitet aus einer Anwendung heraus; die Daten bleiben beim Mandanten.
 
@@ -19,6 +19,7 @@ Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Ma
 4. **Eigenes Repository (`opengewerk-kanzlei`), eigene Releases**, aber ein gemeinsam versioniertes API-Vertrags-Paket (`opengewerk-api-spec`), damit Hub und Handwerkersoftware kompatibel bleiben.
 5. **Berufsrecht zuerst.** Verschwiegenheit (§203 StGB, §57 StBerG), Mandantentrennung und Zugriffsprotokollierung sind Architekturanforderungen, keine Features.
 6. **Offen für weitere Quellen.** Die Handwerkersoftware OpenGewerk (Repo `opengewerk`) ist die erste Quelle; die Adapter-Schicht erlaubt später andere Systeme (sevdesk-API, Lexware-Office-API, CSV-Uploads) ⏳.
+7. **Derselbe Tech-Stack wie die Handwerkersoftware.** Entschieden am 18.09.2026 in den ADRs 0002 bis 0008 des Repositories `opengewerk`: TypeScript mit NestJS, PostgreSQL mit Row-Level Security und Drizzle, React mit Vite. Die ADRs gelten ausdrücklich für beide Anwendungen, damit Domänenpakete, Auth-Muster und Betriebsweise geteilt werden können. Ein eigener Stack für den Hub hätte zwei Ökosysteme für eine Person bedeutet.
 
 ---
 
@@ -122,6 +123,24 @@ Eigene Fristen-Engine im Hub (gleiche Grundidee wie in der Handwerkersoftware), 
 - Mandantenspezifische Fristen aus der Handwerkersoftware (z. B. Sicherheitseinbehalt-Auszahlung, Freistellungsbescheinigung §48 EStG läuft ab)
 - Kanzlei-Fristenkalender über alle Mandanten, Ampel, Zuweisung an Sachbearbeiter, Erinnerung
 - ELSTER-Abgabe erfolgt weiterhin aus der Kanzleisoftware/ELSTER, der Hub liefert die Werte und dokumentiert "abgegeben am" ⏳ (Direktübermittlung wie in der HWS bewusst ausgeklammert)
+- Die Fristen selbst werden nicht im Code berechnet, sondern aus Regeldatensätzen abgeleitet, siehe 3.3a
+
+### 3.3a Regel-Engine für steuerliche Parameter ★ ⚖
+
+Gegenstück zu Abschnitt 1.7 der Feature-Gliederung, auf Kanzleiebene. Die Fristen- und Schwellenwerte des Steuerrechts stehen **nicht im Code**, sondern in versionierten Regeldatensätzen mit Gültigkeitszeitraum, Fundstelle und, wo nötig, Mandantenbezug:
+
+- Abgabefristen: USt-Voranmeldung monatlich oder vierteljährlich, Dauerfristverlängerung mit Sondervorauszahlung, Zusammenfassende Meldung, Lohnsteuer-Anmeldung
+- Schwellen, die den Rhythmus bestimmen: Grenzen für den Voranmeldungszeitraum, Kleinunternehmergrenze §19 UStG, Buchführungspflicht §141 AO
+- Jahresfristen: Steuererklärungen mit und ohne Steuerberater, Offenlegung, Fristverlängerungen
+- Aufbewahrung und Löschung: handels- und steuerrechtliche Fristen, DSGVO-Löschfristen für Hub-Daten
+
+Drei Eigenschaften, die dieselben sind wie beim Mandanten:
+
+1. **Ein Gesetzesupdate ist ein neuer Regeldatensatz mit Gültigkeitsbeginn, kein Release.** Eine Kanzlei kann nicht auf das nächste Softwareupdate warten, wenn sich zum Jahreswechsel eine Frist verschiebt.
+2. **Regeln werden historisch angewendet.** Eine Voranmeldung für 2027 wird auch 2030 nach den Regeln von 2027 beurteilt, sonst stimmen Nachschauen nicht mehr.
+3. **Der Anwender überschreibt keine Regeln**, er setzt nur mandantenbezogene Parameter, etwa Voranmeldungszeitraum, Dauerfristverlängerung ja oder nein, Kleinunternehmer ja oder nein.
+
+Die Regelpakete des Hubs sind eigene Pakete und nicht dieselben wie beim Mandanten: Der Mandant braucht Regeln zum Rechnungstellen, die Kanzlei Regeln zum Abgeben. Gemeinsam ist das Format, damit die Werkzeuge zum Pflegen und Prüfen für beide Seiten dieselben sind.
 
 ### 3.4 Aufgaben & Kommunikation
 
@@ -203,6 +222,8 @@ Damit der Hub funktioniert, braucht die Handwerkersoftware (Hauptplan v2) folgen
 ## 7. Schnittstellenvertrag `opengewerk-api-spec` (Eckpunkte)
 
 - Eigenes Repo mit OpenAPI-Definition, JSON-Schemas und Konformitätstests; SemVer; Hub und HWS deklarieren unterstützte Versionen
+- Stand 18.09.2026: Die Spezifikation steht auf 0.2.0. Pfade, Methoden und Scopes sind festgelegt, die Scopes seit 0.2.0 maschinenlesbar als OAuth-2.0-Schema mit dem Flow `clientCredentials`. Die Nutzlasten sind noch Platzhalter, die JSON-Schemas und die Konformitätstests kommen als Nächstes.
+- Der Token trägt in der ersten Fassung keine kryptografische Bindung an die Hub-Instanz. Er rotiert, läuft bei Inaktivität ab und ist sofort widerrufbar; DPoP oder mTLS kommen später, siehe ADR 0006 im Repo `opengewerk`.
 - Ressourcen: `/periods`, `/journal`, `/accounts`, `/balances`, `/open-items`, `/documents/{id}` (Bild, XML), `/inquiries`, `/proposals`, `/coa-profile`, `/audit-export`, `/access-log`
 - Paginierung, ETags/If-None-Match für effizienten Sync, Idempotenz-Keys bei schreibenden Aufrufen
 - Alle Beträge als Integer-Cent, Datumsangaben ISO 8601, Steuerschlüssel nach DATEV-Konvention (für den späteren Export)
@@ -230,6 +251,8 @@ Damit der Hub funktioniert, braucht die Handwerkersoftware (Hauptplan v2) folgen
 | 4: Schreiben & Export | Buchungsvorschläge, Kontenrahmen-Profile, DATEV-Sammelexport, Prüfer-Zugang, Z1-Z3 | Vollständiger Buchhaltungsprozess |
 | 5: Abschluss & Erweiterung | Jahresabschluss-Checkliste, USt-Verprobung, Abschlussbuchungen, weitere Adapter (sevdesk/Lexware/CSV), Benchmark | Vollausbau |
 
+**Der Hub ist kein paralleler Strang.** Seine Phase 0 verlangt `opengewerk-api-spec` v1 und das Connector-Modul im Mandantensystem, und das ist Inhalt von Phase 3 der Handwerkersoftware. Deren Roadmap wurde mit v2.3 auf ein MVP umgeschnitten: Phase 1 ist der Pilotbetrieb, Phase 3 die Buchhaltung. Vor Phase 3 der Handwerkersoftware gibt es hier nichts zu bauen, was nicht ins Leere liefe. Was sich sinnvoll vorziehen lässt, ist allein der Vertrag.
+
 ---
 
 ## 10. Abgrenzung zu bestehenden Lösungen
@@ -254,13 +277,24 @@ Damit der Hub funktioniert, braucht die Handwerkersoftware (Hauptplan v2) folgen
 
 ---
 
-## 12. Änderungsprotokoll v1 → v1.1
+## 12. Änderungsprotokoll
+
+### v1.1 → v1.2
+
+- Neu: Leitentscheidung 7, derselbe Tech-Stack wie die Handwerkersoftware, entschieden in den ADRs 0002 bis 0008
+- Neu: 3.3a Regel-Engine für steuerliche Parameter, Gegenstück zu Abschnitt 1.7 der Feature-Gliederung
+- Präzisiert: Abschnitt 7 nennt den Stand der Spezifikation (0.2.0, Scopes maschinenlesbar, Nutzlasten offen) und die Token-Eigenschaften nach ADR 0006
+- Präzisiert: Abschnitt 9 sagt ausdrücklich, dass der Hub hinter Phase 3 der Handwerkersoftware hängt, deren Roadmap mit v2.3 neu geschnitten wurde
+- Erledigt: Tech-Stack und Lizenz sind keine offenen Entscheidungen mehr
+
+### v1 → v1.1
 
 - Produktname **OpenGewerk Kanzlei** und Repo `opengewerk-kanzlei` eingetragen; Paketname `kanzlei-api-spec` durch `opengewerk-api-spec` ersetzt
 
 ## 13. Offene Entscheidungen
 
-- Tech-Stack: gleicher Stack wie die Handwerkersoftware (gemeinsame UI-Komponenten, gleiche Betriebsmuster) oder bewusst getrennt?
-- Lizenz: gleiche Open-Source-Lizenz wie die Handwerkersoftware; Klärung, ob Kanzleien ein kommerzielles Support-Modell brauchen
 - Hosting-Empfehlung für Kanzleien ohne eigene IT (Referenz-Hoster mit AV-Vertrag vs. reine Anleitung)
 - Ob der Hub auch für **Bürogemeinschaften/Buchhaltungsbüros** (nicht Steuerberater) freigegeben wird, berufsrechtliche Grenzen (§6 StBerG) beachten
+- Ob Kanzleien ein kommerzielles Support-Modell brauchen. Die Lizenzfrage selbst ist entschieden: AGPL-3.0 wie die Handwerkersoftware, der Schnittstellenvertrag unter Apache-2.0
+
+Zwei Punkte sind seit dem 18.09.2026 entschieden und stehen deshalb nicht mehr hier: der Tech-Stack (ADRs 0002 bis 0008, siehe Leitentscheidung 7) und die Lizenz.
