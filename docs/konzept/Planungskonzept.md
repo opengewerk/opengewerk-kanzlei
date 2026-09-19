@@ -76,7 +76,7 @@ Zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Ma
 
 1. Mandant erzeugt in seiner Handwerkersoftware unter *Einstellungen → Steuerberater* einen Einladungscode (einmalig, 24 h gültig) und wählt die freizugebenden Scopes
 2. Kanzlei gibt Code + Mandanten-URL im Hub ein
-3. Hub tauscht Code gegen langlebigen, rotierbaren Token (OAuth 2.0 Device-/Authorization-Code-ähnlich); Token ist an Hub-Instanz gebunden (mTLS-Zertifikat oder DPoP) ⚖
+3. Hub tauscht Code gegen langlebigen, rotierbaren Token (OAuth 2.0 Device-/Authorization-Code-ähnlich); Token rotierbar, Ablauf bei Inaktivität; kryptografische Bindung an die Hub-Instanz (mTLS oder DPoP) nach der ersten Fassung, siehe ADR 0006 im Repo `opengewerk` ⚖
 4. Mandant sieht in seiner Instanz: verbundene Kanzlei, Scopes, letzte Zugriffe; er kann die Verbindung jederzeit trennen
 
 ### 2.5 Scopes (vom Mandanten vergeben)
@@ -198,7 +198,7 @@ Die Regelpakete des Hubs sind eigene Pakete und nicht dieselben wie beim Mandant
 
 - **Verschwiegenheit** (§203 StGB, §57 StBerG): Hub steht in der Kanzlei oder bei einem Hoster mit Auftragsverarbeitungsvertrag; Belegdaten werden nicht persistent im Hub abgelegt; Nachrichten nur innerhalb des Systems
 - **Zugriffsprotokoll**: jeder Mandantenzugriff (wer, wann, welcher Beleg/Report) wird im Hub **und** im Mandantensystem protokolliert; Mandant kann sein Zugriffslog jederzeit einsehen ★
-- **Token-Sicherheit**: verschlüsselte Ablage, Rotation, Bindung an Hub-Instanz (mTLS/DPoP), automatischer Ablauf bei Inaktivität, Sofort-Sperre durch Mandant
+- **Token-Sicherheit**: verschlüsselte Ablage, Rotation, automatischer Ablauf bei Inaktivität, Sofort-Sperre durch Mandant; die Bindung an die Hub-Instanz (mTLS/DPoP) kommt nach der ersten Fassung, siehe ADR 0006 im Repo `opengewerk`
 - **Transport**: TLS 1.3, optional WireGuard/Tailscale-Tunnel zwischen Kanzlei und Mandanten (Empfehlung im Admin-Handbuch)
 - **DSGVO**: Kanzlei ist Verantwortlicher für ihre Nutzerdaten; für Mandantendaten bleibt der Mandant Verantwortlicher; AV-Vertrag nur bei externem Hub-Hosting; Verarbeitungsverzeichnis für den Hub generiert
 - **GoBD**: der Hub verändert keine festgeschriebenen Daten; alle schreibenden Aktionen laufen als Vorschlag/Buchung im Mandantensystem und dessen Journal
@@ -223,7 +223,6 @@ Damit der Hub funktioniert, braucht die Handwerkersoftware (Hauptplan v2) folgen
 
 - Eigenes Repo mit OpenAPI-Definition, JSON-Schemas und Konformitätstests; SemVer; Hub und HWS deklarieren unterstützte Versionen
 - Stand 18.09.2026: Die Spezifikation steht auf 0.2.0. Pfade, Methoden und Scopes sind festgelegt, die Scopes seit 0.2.0 maschinenlesbar als OAuth-2.0-Schema mit dem Flow `clientCredentials`. Die Nutzlasten sind noch Platzhalter, die JSON-Schemas und die Konformitätstests kommen als Nächstes.
-- Der Token trägt in der ersten Fassung keine kryptografische Bindung an die Hub-Instanz. Er rotiert, läuft bei Inaktivität ab und ist sofort widerrufbar; DPoP oder mTLS kommen später, siehe ADR 0006 im Repo `opengewerk`.
 - Ressourcen: `/periods`, `/journal`, `/accounts`, `/balances`, `/open-items`, `/documents/{id}` (Bild, XML), `/inquiries`, `/proposals`, `/coa-profile`, `/audit-export`, `/access-log`
 - Paginierung, ETags/If-None-Match für effizienten Sync, Idempotenz-Keys bei schreibenden Aufrufen
 - Alle Beträge als Integer-Cent, Datumsangaben ISO 8601, Steuerschlüssel nach DATEV-Konvention (für den späteren Export)

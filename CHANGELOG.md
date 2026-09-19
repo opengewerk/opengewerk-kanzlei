@@ -14,6 +14,13 @@ die Versionsnummern folgen der [Semantischen Versionierung](https://semver.org/l
 
 ### Geändert
 
+- Das Planungskonzept sagt die Bindung des Tokens an die Hub-Instanz nicht mehr für die
+  erste Fassung zu. ADR 0006 hat am 18.09.2026 anders entschieden: rotierende
+  Bearer-Token in Phase 3, mTLS oder DPoP danach. Die Zusage stand an zwei Stellen, eine
+  davon mit dem Zeichen für berufsrechtliche Relevanz, und die Richtigstellung stand
+  vierzig Zeilen weiter unten in einem anderen Abschnitt. Jetzt steht sie an den beiden
+  Stellen selbst, und die Kopie darunter ist weg
+
 - Die Workflow-Dateien folgen der Regel "Code ist immer Englisch": Job-Kennungen,
   Variablen und Kommentare in den eingebetteten Skripten sind englisch. Deutsch bleibt,
   was ein Mensch liest, also die Job- und Schrittnamen in der Actions-Oberfläche und die
