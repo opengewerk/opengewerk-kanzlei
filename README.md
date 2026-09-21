@@ -24,7 +24,7 @@ OpenGewerk Kanzlei ist ein zentrales, self-hosted System für Steuerberaterkanzl
 
 1. Der Mandant erzeugt in seiner Handwerkersoftware unter *Einstellungen → Steuerberater* einen Einladungscode (einmalig, 24 Stunden gültig) und wählt die freizugebenden Scopes.
 2. Die Kanzlei gibt Code und Mandanten-URL im Hub ein.
-3. Der Hub tauscht den Code gegen einen langlebigen, rotierbaren Token (ähnlich OAuth 2.0 Device- beziehungsweise Authorization-Code-Flow); der Token ist an die Hub-Instanz gebunden, über mTLS-Zertifikat oder DPoP.
+3. Der Hub tauscht den Code gegen einen langlebigen, rotierbaren Token (ähnlich OAuth 2.0 Device- beziehungsweise Authorization-Code-Flow). Die kryptografische Bindung des Tokens an die Hub-Instanz über mTLS oder DPoP kommt nach der ersten Fassung; so hat es ADR 0006 im Repository `opengewerk` entschieden.
 4. Der Mandant sieht in seiner Instanz die verbundene Kanzlei, die Scopes und die letzten Zugriffe und kann die Verbindung jederzeit trennen.
 
 Welche Scopes es gibt und was sie umfassen, steht in [`docs/konzept/Planungskonzept.md`](docs/konzept/Planungskonzept.md), Abschnitt 2.5, und in der Spezifikation unter [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec).
@@ -33,18 +33,13 @@ Welche Scopes es gibt und was sie umfassen, steht in [`docs/konzept/Planungskonz
 
 OpenGewerk Kanzlei ist in der **Planungsphase**. Es gibt noch keinen lauffähigen Code, nur das ausgearbeitete Konzept und dieses Repository-Gerüst.
 
-Das vollständige Konzept liegt unter [`docs/konzept/`](docs/konzept/). Der Hub kann erst gebaut werden, wenn der gemeinsame API-Vertrag steht, deshalb beginnt die Roadmap mit Phase 0.
+Der Hub ist kein paralleler Strang. Seine erste Phase verlangt den API-Vertrag in Version 1 und das Connector-Modul in der Handwerkersoftware, und das gehört dort zu Phase 3, der Buchhaltung. Die Handwerkersoftware steckt gerade in Phase 1, dem MVP für ihren Pilotbetrieb. Vorher gibt es hier nichts zu bauen, was nicht ins Leere liefe; vorziehen lässt sich allein der Vertrag in [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec).
+
+Das vollständige Konzept liegt unter [`docs/konzept/`](docs/konzept/).
 
 ## Roadmap
 
-| Phase | Inhalt | Ergebnis |
-| --- | --- | --- |
-| 0: Vertrag | `opengewerk-api-spec` v1, Connector-Modul in der HWS, Handshake, Scopes, Audit-Log beidseitig | Verbindung steht, read-only |
-| 1: Übersicht | Mandantenliste, Status-Ampel, Gesundheitsindex, Cache/Sync, Webhooks | Kanzlei sieht alle Mandanten auf einen Blick |
-| 2: Arbeitsplatz | Belegprüfung, Journal/Konten/OP live, Rückfragen, Fehlende-Belege-Liste | Monatsarbeit aus dem Hub |
-| 3: Fristen & Aufgaben | Kanzlei-Fristen-Engine, Aufgaben, Checklisten, Sachbearbeiter-Zuweisung | Kanzleisteuerung |
-| 4: Schreiben & Export | Buchungsvorschläge, Kontenrahmen-Profile, DATEV-Sammelexport, Prüfer-Zugang, Z1-Z3 | Vollständiger Buchhaltungsprozess |
-| 5: Abschluss & Erweiterung | Jahresabschluss-Checkliste, USt-Verprobung, Abschlussbuchungen, weitere Adapter (sevdesk/Lexware/CSV), Benchmark | Vollausbau |
+Der Fahrplan in sechs Phasen, vom Vertrag bis zum Vollausbau, steht in [Abschnitt 9 des Planungskonzepts](docs/konzept/Planungskonzept.md#9-roadmap) und bewusst nur dort. Eine Abschrift daneben läuft irgendwann auseinander.
 
 ## Projektfamilie
 
@@ -57,6 +52,7 @@ Das vollständige Konzept liegt unter [`docs/konzept/`](docs/konzept/). Der Hub 
 Besonders wertvoll sind Rückmeldungen aus dem Kanzleialltag: welche Kennzahl am Montagmorgen wirklich zählt, wo eine Rückfrage heute noch per Telefon läuft, welche Berufsrechtsfrage im Konzept fehlt.
 
 - Fragen, Ideen und alles ohne konkreten Vorschlag gehören in die [Discussions](https://github.com/opengewerk/opengewerk-kanzlei/discussions).
+- Für kurze Fragen und zum Mitreden gibt es einen [Discord-Server](https://discord.gg/NRrEvbQdxz). Er ersetzt die Discussions nicht: ein Chatverlauf ist nicht durchsuchbar, und was dort geklärt wird und für andere zählt, gehört hinterher in eine Discussion oder ein Issue.
 - Konkrete Fehler und Wünsche laufen über die [Issue-Vorlagen](https://github.com/opengewerk/opengewerk-kanzlei/issues/new/choose).
 - Die Beitragsregeln stehen in [CONTRIBUTING.md](https://github.com/opengewerk/.github/blob/main/CONTRIBUTING.md), der Verhaltenskodex in [CODE_OF_CONDUCT.md](https://github.com/opengewerk/.github/blob/main/CODE_OF_CONDUCT.md).
 

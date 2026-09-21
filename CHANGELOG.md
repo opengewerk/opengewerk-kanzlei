@@ -14,6 +14,17 @@ die Versionsnummern folgen der [Semantischen Versionierung](https://semver.org/l
 
 ### Geändert
 
+- Die README sagt nicht mehr, der Token sei über mTLS oder DPoP an die Hub-Instanz
+  gebunden. Das Planungskonzept ist mit #7 richtiggestellt worden, die README war eine
+  dritte Stelle mit derselben Zusage und blieb dabei stehen
+- Der Status in der README nennt den Grund, warum hier noch nichts gebaut wird: der Hub
+  hängt nicht nur am Vertrag, sondern auch am Connector-Modul aus Phase 3 der
+  Handwerkersoftware. So steht es seit v1.2 im Planungskonzept
+- Die Roadmap steht nur noch in Abschnitt 9 des Planungskonzepts, die README verweist
+  darauf. Eine Abschrift daneben läuft irgendwann auseinander
+- Unter Mitmachen nennt die README den Discord-Server, wie die Beitragsregeln der
+  Organisation
+
 - Das Planungskonzept sagt die Bindung des Tokens an die Hub-Instanz nicht mehr für die
   erste Fassung zu. ADR 0006 hat am 18.09.2026 anders entschieden: rotierende
   Bearer-Token in Phase 3, mTLS oder DPoP danach. Die Zusage stand an zwei Stellen, eine
