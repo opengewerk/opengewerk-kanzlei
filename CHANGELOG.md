@@ -14,6 +14,10 @@ die Versionsnummern folgen der [Semantischen Versionierung](https://semver.org/l
 
 ### Geändert
 
+- Die Workflows nehmen die neuesten Hauptversionen der Actions: `actions/checkout` in
+  v7, CodeQL in v4. Die alten Fassungen liefen noch auf Node 20, dessen Pflege im April
+  2026 endete, und CodeQL v3 wird im Dezember 2026 abgekündigt
+
 - Die README sagt nicht mehr, der Token sei über mTLS oder DPoP an die Hub-Instanz
   gebunden. Das Planungskonzept ist mit #7 richtiggestellt worden, die README war eine
   dritte Stelle mit derselben Zusage und blieb dabei stehen
