@@ -6,9 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Danke, dass du dir die Zeit nimmst. Das Projekt ist in der Planungsphase,
-        es gibt noch keinen lauffähigen Code. Fehlerberichte betreffen daher
-        aktuell vor allem die Dokumente und die Spezifikation.
+        Danke, dass du dir die Zeit nimmst. Der Kanzlei-Hub ist noch in der Planung,
+        lauffähigen Code gibt es hier noch nicht. Fehlerberichte betreffen daher vor
+        allem das Planungskonzept und die übrigen Dokumente.
 
   - type: textarea
     id: beschreibung
