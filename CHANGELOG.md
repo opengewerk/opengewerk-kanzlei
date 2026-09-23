@@ -14,6 +14,9 @@ die Versionsnummern folgen der [Semantischen Versionierung](https://semver.org/l
 
 ### Geändert
 
+- Die Prüfung "Schreibweise" kennt keine Ausnahme mehr für die zwei Schlüssel der
+  Konventionen im API-Vertrag, die Umlaute umschrieben. Der Vertrag benennt sie seit
+  opengewerk-api-spec#19 englisch, und der Job bleibt in allen Repositories derselbe
 - Die Workflows nehmen die neuesten Hauptversionen der Actions: `actions/checkout` in
   v7, CodeQL in v4. Die alten Fassungen liefen noch auf Node 20, dessen Pflege im April
   2026 endete, und CodeQL v3 wird im Dezember 2026 abgekündigt
