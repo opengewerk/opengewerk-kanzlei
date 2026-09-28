@@ -11,6 +11,8 @@ die Versionsnummern folgen der [Semantischen Versionierung](https://semver.org/l
 
 - Initiales Repository-Gerüst
 - CI-Job "Schreibweise", der Gedankenstriche im gesamten Repository meldet
+- Die README verlinkt das Subreddit r/OpenGewerk neben dem Discord-Server, als Ort für den
+  Austausch, auch unter Kanzleien
 
 ### Geändert
 
