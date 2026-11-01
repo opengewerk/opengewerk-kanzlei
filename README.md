@@ -5,11 +5,11 @@
   </picture>
 </p>
 
-<p align="center"><strong>Self-hosted Hub für Steuerberater</strong></p>
+<p align="center"><strong>Self-hosted Open-Source-Hub für Steuerberater und ihre Mandanten aus dem Handwerk</strong></p>
 
 ## Was ist OpenGewerk Kanzlei?
 
-OpenGewerk Kanzlei ist ein zentrales, self-hosted System für Steuerberaterkanzleien, das beliebig viele Mandanten-Instanzen der Handwerkersoftware anbindet. Der Leitsatz lautet **Föderation statt Zentralisierung**: Der Hub speichert keine Buchhaltung, er greift per API live auf die Mandantensysteme zu und hält nur einen Cache für Übersichten. Die Datenhoheit bleibt beim Mandanten, und genau das ist das Argument gegenüber DATEV Unternehmen online. Lesender Zugriff ist der Default, schreibende Rechte gibt der Mandant einzeln pro Scope frei und kann sie jederzeit widerrufen. Die Verbindung wird immer vom Mandanten aus aufgebaut, damit kein Betrieb ohne sein Wissen angebunden werden kann. Verschwiegenheit nach §203 StGB und §57 StBerG, Mandantentrennung und Zugriffsprotokollierung sind Architekturanforderungen, keine Features.
+OpenGewerk Kanzlei ist ein Open-Source-Hub für Steuerberaterkanzleien, self-hosted auf dem Server der Kanzlei. Er bindet beliebig viele Mandanten an, die die Handwerkersoftware OpenGewerk nutzen, und zeigt sie in einer Anwendung. Der Leitsatz lautet "Föderation statt Zentralisierung": Der Hub speichert keine Buchhaltung, er greift per API live auf die Systeme der Mandanten zu und hält nur einen Cache für Übersichten. Die Daten bleiben beim Mandanten; darin unterscheidet sich der Hub von DATEV Unternehmen online, wo sie zentral bei DATEV liegen. Lesender Zugriff ist der Default, schreibende Rechte gibt der Mandant einzeln je Scope frei und kann sie jederzeit widerrufen. Die Verbindung baut immer der Mandant auf, damit kein Betrieb ohne sein Wissen angebunden werden kann. Verschwiegenheit nach §203 StGB und §57 StBerG, Mandantentrennung und Zugriffsprotokollierung sind Anforderungen an die Architektur und von Anfang an eingeplant.
 
 ## Abgrenzung zu bestehenden Lösungen
 
@@ -33,23 +33,23 @@ Welche Scopes es gibt und was sie umfassen, steht in [`docs/konzept/Planungskonz
 
 OpenGewerk Kanzlei ist in der **Planungsphase**. Es gibt noch keinen lauffähigen Code, nur das ausgearbeitete Konzept und dieses Repository-Gerüst.
 
-Der Hub ist kein paralleler Strang. Seine erste Phase verlangt den API-Vertrag in Version 1 und das Connector-Modul in der Handwerkersoftware, und das gehört dort zu Phase 3, der Buchhaltung. Die Handwerkersoftware steckt gerade in Phase 1, dem MVP für ihren Pilotbetrieb. Vorher gibt es hier nichts zu bauen, was nicht ins Leere liefe; vorziehen lässt sich allein der Vertrag in [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec).
+Der Hub ist kein paralleler Strang. Seine erste Phase verlangt den API-Vertrag in Version 1 und das Connector-Modul in der Handwerkersoftware, und das gehört dort zu Phase 3, der Buchhaltung. Die Handwerkersoftware hat Phase 1 hinter sich und baut an Phase 2, dem Kern für Elektro und PV. Vorher gibt es hier nichts zu bauen, was nicht ins Leere liefe; vorziehen lässt sich allein der Vertrag in [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec).
 
 Das vollständige Konzept liegt unter [`docs/konzept/`](docs/konzept/).
 
 ## Roadmap
 
-Der Fahrplan in sechs Phasen, vom Vertrag bis zum Vollausbau, steht in [Abschnitt 9 des Planungskonzepts](docs/konzept/Planungskonzept.md#9-roadmap) und bewusst nur dort. Eine Abschrift daneben läuft irgendwann auseinander.
+Der Fahrplan in sechs Phasen, vom Vertrag bis zum Vollausbau, steht in [Abschnitt 9 des Planungskonzepts](docs/konzept/Planungskonzept.md#9-roadmap).
 
 ## Projektfamilie
 
-- [`opengewerk`](https://github.com/opengewerk/opengewerk): die Handwerkersoftware beim Mandanten, erste und bisher einzige Quelle für den Hub.
+- [`opengewerk`](https://github.com/opengewerk/opengewerk): die Open-Source-Handwerkersoftware mit CRM und ERP beim Mandanten, erste und bisher einzige Quelle für den Hub.
 - [`opengewerk-kanzlei`](https://github.com/opengewerk/opengewerk-kanzlei): dieser Hub, mit dem eine Kanzlei alle Mandanten aus einer Anwendung heraus bearbeitet.
 - [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec): der gemeinsame API-Vertrag, den Hub und Handwerkersoftware beide implementieren und dessen unterstützte Version beide Seiten deklarieren.
 
 ## Mitmachen
 
-Besonders wertvoll sind Rückmeldungen aus dem Kanzleialltag: welche Kennzahl am Montagmorgen wirklich zählt, wo eine Rückfrage heute noch per Telefon läuft, welche Berufsrechtsfrage im Konzept fehlt.
+Am meisten helfen Rückmeldungen aus dem Kanzleialltag: welche Kennzahl am Montagmorgen wirklich zählt, wo eine Rückfrage heute noch per Telefon läuft, welche Berufsrechtsfrage im Konzept fehlt.
 
 - Fragen, Ideen und alles ohne konkreten Vorschlag gehören in die [Discussions](https://github.com/opengewerk/opengewerk-kanzlei/discussions).
 - Für kurze Fragen und zum Mitreden gibt es einen [Discord-Server](https://discord.gg/NRrEvbQdxz). Er ersetzt die Discussions nicht: ein Chatverlauf ist nicht durchsuchbar, und was dort geklärt wird und für andere zählt, gehört hinterher in eine Discussion oder ein Issue.
