@@ -16,6 +16,10 @@ die Versionsnummern folgen der [Semantischen Versionierung](https://semver.org/l
 
 ### Geändert
 
+- Die README nennt den Hub im Kopf und im ersten Satz Open Source und self-hosted, sagt, dass er
+  Mandanten mit der Handwerkersoftware OpenGewerk bündelt, und gibt den Stand der
+  Handwerkersoftware richtig an: Phase 2, nicht mehr Phase 1. Warum: mit diesen Wörtern sucht,
+  wer eine Kanzleianbindung ohne zentrale Datenhaltung will, und der Stand war veraltet
 - Die Vorlage für einen Fehlerbericht spricht vom Kanzlei-Hub statt vom ganzen Projekt. Das
   Projekt ist nicht mehr in der Planungsphase, die Handwerkersoftware läuft; ohne Code ist
   hier nur der Hub
