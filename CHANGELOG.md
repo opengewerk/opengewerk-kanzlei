@@ -16,6 +16,8 @@ die Versionsnummern folgen der [Semantischen Versionierung](https://semver.org/l
 
 ### Geändert
 
+- Die Organisation auf GitHub heißt jetzt OpenGewerk statt opengewerk, die Links in README und
+  Dokumentation zeigen auf den neuen Namen. Die alten Adressen leitet GitHub weiter.
 - Die README nennt den Hub im Kopf und im ersten Satz Open Source und self-hosted, sagt, dass er
   Mandanten mit der Handwerkersoftware OpenGewerk bündelt, und gibt den Stand der
   Handwerkersoftware richtig an: Phase 2, nicht mehr Phase 1. Warum: mit diesen Wörtern sucht,
