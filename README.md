@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/opengewerk/.github/main/brand/opengewerk-logo-dark.svg">
-    <img alt="OpenGewerk" src="https://raw.githubusercontent.com/opengewerk/.github/main/brand/opengewerk-logo.svg" width="420">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/OpenGewerk/.github/main/brand/opengewerk-logo-dark.svg">
+    <img alt="OpenGewerk" src="https://raw.githubusercontent.com/OpenGewerk/.github/main/brand/opengewerk-logo.svg" width="420">
   </picture>
 </p>
 
@@ -27,13 +27,13 @@ OpenGewerk Kanzlei ist ein Open-Source-Hub für Steuerberaterkanzleien, self-hos
 3. Der Hub tauscht den Code gegen einen langlebigen, rotierbaren Token (ähnlich OAuth 2.0 Device- beziehungsweise Authorization-Code-Flow). Die kryptografische Bindung des Tokens an die Hub-Instanz über mTLS oder DPoP kommt nach der ersten Fassung; so hat es ADR 0006 im Repository `opengewerk` entschieden.
 4. Der Mandant sieht in seiner Instanz die verbundene Kanzlei, die Scopes und die letzten Zugriffe und kann die Verbindung jederzeit trennen.
 
-Welche Scopes es gibt und was sie umfassen, steht in [`docs/konzept/Planungskonzept.md`](docs/konzept/Planungskonzept.md), Abschnitt 2.5, und in der Spezifikation unter [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec).
+Welche Scopes es gibt und was sie umfassen, steht in [`docs/konzept/Planungskonzept.md`](docs/konzept/Planungskonzept.md), Abschnitt 2.5, und in der Spezifikation unter [`opengewerk-api-spec`](https://github.com/OpenGewerk/opengewerk-api-spec).
 
 ## Status
 
 OpenGewerk Kanzlei ist in der **Planungsphase**. Es gibt noch keinen lauffähigen Code, nur das ausgearbeitete Konzept und dieses Repository-Gerüst.
 
-Der Hub ist kein paralleler Strang. Seine erste Phase verlangt den API-Vertrag in Version 1 und das Connector-Modul in der Handwerkersoftware, und das gehört dort zu Phase 3, der Buchhaltung. Die Handwerkersoftware hat Phase 1 hinter sich und baut an Phase 2, dem Kern für Elektro und PV. Vorher gibt es hier nichts zu bauen, was nicht ins Leere liefe; vorziehen lässt sich allein der Vertrag in [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec).
+Der Hub ist kein paralleler Strang. Seine erste Phase verlangt den API-Vertrag in Version 1 und das Connector-Modul in der Handwerkersoftware, und das gehört dort zu Phase 3, der Buchhaltung. Die Handwerkersoftware hat Phase 1 hinter sich und baut an Phase 2, dem Kern für Elektro und PV. Vorher gibt es hier nichts zu bauen, was nicht ins Leere liefe; vorziehen lässt sich allein der Vertrag in [`opengewerk-api-spec`](https://github.com/OpenGewerk/opengewerk-api-spec).
 
 Das vollständige Konzept liegt unter [`docs/konzept/`](docs/konzept/).
 
@@ -43,19 +43,19 @@ Der Fahrplan in sechs Phasen, vom Vertrag bis zum Vollausbau, steht in [Abschnit
 
 ## Projektfamilie
 
-- [`opengewerk`](https://github.com/opengewerk/opengewerk): die Open-Source-Handwerkersoftware mit CRM und ERP beim Mandanten, erste und bisher einzige Quelle für den Hub.
-- [`opengewerk-kanzlei`](https://github.com/opengewerk/opengewerk-kanzlei): dieser Hub, mit dem eine Kanzlei alle Mandanten aus einer Anwendung heraus bearbeitet.
-- [`opengewerk-api-spec`](https://github.com/opengewerk/opengewerk-api-spec): der gemeinsame API-Vertrag, den Hub und Handwerkersoftware beide implementieren und dessen unterstützte Version beide Seiten deklarieren.
+- [`opengewerk`](https://github.com/OpenGewerk/opengewerk): die Open-Source-Handwerkersoftware mit CRM und ERP beim Mandanten, erste und bisher einzige Quelle für den Hub.
+- [`opengewerk-kanzlei`](https://github.com/OpenGewerk/opengewerk-kanzlei): dieser Hub, mit dem eine Kanzlei alle Mandanten aus einer Anwendung heraus bearbeitet.
+- [`opengewerk-api-spec`](https://github.com/OpenGewerk/opengewerk-api-spec): der gemeinsame API-Vertrag, den Hub und Handwerkersoftware beide implementieren und dessen unterstützte Version beide Seiten deklarieren.
 
 ## Mitmachen
 
 Am meisten helfen Rückmeldungen aus dem Kanzleialltag: welche Kennzahl am Montagmorgen wirklich zählt, wo eine Rückfrage heute noch per Telefon läuft, welche Berufsrechtsfrage im Konzept fehlt.
 
-- Fragen, Ideen und alles ohne konkreten Vorschlag gehören in die [Discussions](https://github.com/opengewerk/opengewerk-kanzlei/discussions).
+- Fragen, Ideen und alles ohne konkreten Vorschlag gehören in die [Discussions](https://github.com/OpenGewerk/opengewerk-kanzlei/discussions).
 - Für kurze Fragen und zum Mitreden gibt es einen [Discord-Server](https://discord.gg/NRrEvbQdxz). Er ersetzt die Discussions nicht: ein Chatverlauf ist nicht durchsuchbar, und was dort geklärt wird und für andere zählt, gehört hinterher in eine Discussion oder ein Issue.
 - Zum Austausch gibt es [r/OpenGewerk](https://www.reddit.com/r/OpenGewerk/) auf Reddit, für Betriebe wie für Kanzleien. Was dort als Fehler oder Wunsch übrig bleibt, gehört als Issue hierher.
-- Konkrete Fehler und Wünsche laufen über die [Issue-Vorlagen](https://github.com/opengewerk/opengewerk-kanzlei/issues/new/choose).
-- Die Beitragsregeln stehen in [CONTRIBUTING.md](https://github.com/opengewerk/.github/blob/main/CONTRIBUTING.md), der Verhaltenskodex in [CODE_OF_CONDUCT.md](https://github.com/opengewerk/.github/blob/main/CODE_OF_CONDUCT.md).
+- Konkrete Fehler und Wünsche laufen über die [Issue-Vorlagen](https://github.com/OpenGewerk/opengewerk-kanzlei/issues/new/choose).
+- Die Beitragsregeln stehen in [CONTRIBUTING.md](https://github.com/OpenGewerk/.github/blob/main/CONTRIBUTING.md), der Verhaltenskodex in [CODE_OF_CONDUCT.md](https://github.com/OpenGewerk/.github/blob/main/CODE_OF_CONDUCT.md).
 
 ## Lizenz
 
